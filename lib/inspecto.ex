@@ -68,6 +68,7 @@ defmodule Inspecto do
         ...
       ]
   """
+  @spec summarize(modules :: [module()], opts :: Keyword.t()) :: String.t() | [Schema.t()]
   def summarize(modules, opts \\ []) when is_list(modules) do
     format = Keyword.get(opts, :format, :raw)
 
