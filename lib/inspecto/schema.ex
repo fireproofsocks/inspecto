@@ -1,19 +1,53 @@
 defmodule Inspecto.Schema do
   @moduledoc """
-  This defines the shape of schema inspections
+  This defines the shape of Ecto schema inspections.
   """
+  alias Inspecto.Schema.Field
+
+  @type t :: %__MODULE__{
+          module: module(),
+          source: String.t() | nil,
+          primary_key: [atom()],
+          fields: [Field.t()]
+        }
+
   defstruct module: nil, source: nil, primary_key: [], fields: []
 
   defmodule Field do
     @moduledoc false
+    @type t :: %__MODULE__{
+            name: atom(),
+            type: atom() | tuple(),
+            default: any()
+          }
+
     defstruct name: nil, type: nil, default: nil
   end
 
   @doc """
-  Inspects the given Ecto schema module. This will raise if the given module does not
-  define an Ecto schema (this isn't 100% accurate, but it's unlikely that other modules
-  would coincidentally define the same functions as an Ecto schema).
+  Inspects the given Ecto schema module. This will return an `:invalid_module` tuple
+  if the given module does not define an Ecto schema (this isn't 100% accurate, but
+  it's unlikely that other modules would coincidentally define the same functions
+  as an Ecto schema).
+
+  ## Examples
+
+      iex> Inspecto.Schema.inspect(MyApp.Schemas.MyThing)
+      {:ok, %Inspecto.Schema{
+        module: MyApp.Schemas.MyThing,
+        source: "things",
+        primary_key: [:id],
+        fields: [
+          %Inspecto.Schema.Field{name: :id, type: :integer, default: nil},
+          %Inspecto.Schema.Field{name: :name, type: :string, default: ""},
+          %Inspecto.Schema.Field{name: :created_at, type: :naive_datetime, default: nil},
+        ]
+      }}
+
+      iex> Inspecto.Schema.inspect(Enum)
+      {:invalid_module, Enum}
   """
+  @spec inspect(module :: module()) :: {:ok, t()} | {:invalid_module, module()}
   def inspect(module) when is_atom(module) do
     {:ok,
      %__MODULE__{
@@ -32,11 +66,12 @@ defmodule Inspecto.Schema do
     UndefinedFunctionError -> {:invalid_module, module}
   end
 
+  @spec fieldtype(module :: module(), fieldname :: atom()) :: any()
   defp fieldtype(module, fieldname) do
     module.__changeset__()
     |> Map.get(fieldname)
     |> case do
-      {:embed, %Ecto.Embedded{cardinality: :many, related: related}} ->
+      {:embed, %{cardinality: :many, related: related}} ->
         "ARRAY(#{stringify(related)})"
 
       other ->
