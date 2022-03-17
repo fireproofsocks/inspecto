@@ -74,7 +74,7 @@ defmodule Inspecto.MixProject do
       test_coverage: [
         tool: ExCoveralls
       ],
-      version: "0.1.0",
+      version: @version,
       docs: [
         source_ref: "v#{@version}",
         logo: "logo.png"
