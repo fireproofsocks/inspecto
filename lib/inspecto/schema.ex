@@ -14,7 +14,9 @@ defmodule Inspecto.Schema do
   defstruct module: nil, source: nil, primary_key: [], fields: []
 
   defmodule Field do
-    @moduledoc false
+    @moduledoc """
+    Contains info about a specific field.
+    """
     @type t :: %__MODULE__{
             name: atom(),
             type: atom() | tuple(),
