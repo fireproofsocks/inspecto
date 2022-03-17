@@ -1,4 +1,4 @@
-<h2>`<%= stringify(schema.module) %>`</h2>
+<h2><a href="<%= stringify(schema.module) %>.html"><%= stringify(schema.module) %></a></h2>
 <ul>
     <li>Source: <%= schema.source %></li>
     <li>Primary Key(s): <%= inspect(schema.primary_key) %></li>
@@ -15,7 +15,7 @@
         <%= for field <- schema.fields do %>
             <tr>
                 <td><%= field.name %></td>
-                <td><%= inspect(field.type) %></td>
+                <td><%= String.trim(inspect(field.type), "\"") %></td>
                 <td><%= inspect(field.default) %></td>
             </tr>
         <% end %>
