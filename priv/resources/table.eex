@@ -1,0 +1,23 @@
+<h2><%= stringify(schema.module) %></h2>
+<ul>
+    <li>Source: <%= schema.source %></li>
+    <li>Primary Key(s): <%= inspect(schema.primary_key) %></li>
+</ul>
+<table class="inspecto_schema">
+    <thead>
+        <tr>
+            <th>Field</th>
+            <th>Type</th>
+            <th>Default</th>
+        </tr>
+    </thead>
+    <tbody>
+        <%= for field <- schema.fields do %>
+            <tr>
+                <td><%= field.name %></td>
+                <td><%= inspect(field.type) %></td>
+                <td><%= inspect(field.default) %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>

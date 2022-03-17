@@ -1,0 +1,17 @@
+<style>
+    table.inspecto_schema th {
+        padding: 10px;
+    }
+    table.inspecto_schema tr:nth-child(odd) {
+        background:#7a7a7a;
+    }
+    table.inspecto_schema tr:nth-child(even) {
+        background:#5c5c5c;
+    }
+</style>
+
+<div>
+    <%= for s <- schemas do %>
+        <%= table(s) %> 
+    <% end %>
+</div>
