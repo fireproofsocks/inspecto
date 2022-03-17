@@ -1,4 +1,4 @@
-<h2><%= stringify(schema.module) %></h2>
+<h2>`<%= stringify(schema.module) %>`</h2>
 <ul>
     <li>Source: <%= schema.source %></li>
     <li>Primary Key(s): <%= inspect(schema.primary_key) %></li>
