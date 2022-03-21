@@ -9,7 +9,7 @@
 `Inspecto` is a utility for inspecting Ecto schemas to view the field names,
   data types, and default values.
 
-Note that Ecto schema modules do not contain full information about your database schemas: they only contain enough information to act as a viable intermediary for the Elixir layer.  You cannot, for example, know character length limits or input constraints by merely inspecting Ecto schemas.  Although Ecto _migrations_ contain a lot more of this information, they too aren't great for the purpose because (by design) migrations are additive with changes spread out over time, and importantly, ther is no requirement that a database be defined via migrations! So `Inspecto` attempts to provide insight into what it can.
+Note that Ecto schema modules do not contain full information about your database schemas: they only contain enough information to act as a viable intermediary for the Elixir layer.  You cannot, for example, know character length limits or input constraints by merely inspecting Ecto schemas.  Although Ecto _migrations_ contain a lot more of this information, they too aren't great for the purpose because (by design) migrations are additive with changes spread out over time, and importantly, there is no requirement that a database be defined via migrations! So `Inspecto` attempts to provide insight into what it can.
 
 ## Installation
 
@@ -26,7 +26,7 @@ end
 
 ## Usage
 
-The envisioned usage of this packge is to call it from within one of your application's `@moduledoc` tags, e.g.
+The envisioned usage of this package is to call it from within one of your application's `@moduledoc` tags, e.g.
 
 ```elixir
 defmodule MyApp.MyModel do
