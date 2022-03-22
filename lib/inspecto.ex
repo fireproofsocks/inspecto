@@ -14,7 +14,7 @@ defmodule Inspecto do
   ## Usage
 
   The expected usage of this package is to call `Inspecto.summarize/2` from within
-  a `@moduledoc` tag somewhere inside your app, whereever you wish a summary of
+  a `@moduledoc` tag somewhere inside your app, wherever you wish a summary of
   your Ecto schemas to appear, e.g. something like this:
 
   ```
