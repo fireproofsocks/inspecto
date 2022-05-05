@@ -30,11 +30,11 @@ The envisioned usage of this package is to call it from within one of your appli
 
 ```elixir
 defmodule MyApp.MyModel do
-  @moduledoc \"\"\"
+  @moduledoc """
   Here is a summary of my Ecto schemas:
 
-  \#\{ MyApp.MyModel |> Inspecto.modules() |> Inspecto.summarize(format: :html)\}
-  \"\"\"
+  #{ MyApp.MyModel |> Inspecto.modules() |> Inspecto.summarize(format: :html)}
+  """
 end
 ```
 

@@ -64,9 +64,19 @@ defmodule Inspecto do
 
       iex> MyApp.Schemas |> Inspecto.modules() |> Inspecto.summarize(format: :raw)
       [
-        %Inspecto.Schema{...},
-        ...
-      ]
+        %Inspecto.Schema{
+          fields: [
+            %Inspecto.Schema.Field{default: nil, name: :id, type: :binary_id},
+            %Inspecto.Schema.Field{default: nil, name: :meta, type: :map},
+            %Inspecto.Schema.Field{default: 30, name: :net, type: :integer},
+            # ...
+          ],
+          module:MyApp.Schemas.SomeSchema,
+          primary_key: [:id],
+          source: "some_table"
+        }
+      ],
+      #  ...
   """
   @spec summarize(modules :: [module()], opts :: Keyword.t()) :: String.t() | [Schema.t()]
   def summarize(modules, opts \\ []) when is_list(modules) do
