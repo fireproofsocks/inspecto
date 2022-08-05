@@ -44,5 +44,10 @@ defmodule InspectoTest do
              |> Inspecto.summarize(format: :html)
              |> String.valid?()
     end
+
+    test "applies proper heading level" do
+      assert [FakeEctoSchema]
+             |> Inspecto.summarize(format: :html, h: 4) =~ "<h4>"
+    end
   end
 end

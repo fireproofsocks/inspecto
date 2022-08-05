@@ -12,6 +12,6 @@
 
 <div>
     <%= for s <- schemas do %>
-        <%= table(s) %> 
+        <%= table(s, heading_level) %> 
     <% end %>
 </div>
