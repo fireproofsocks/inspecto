@@ -51,6 +51,8 @@ defmodule Inspecto do
   ## Options
 
   - `:format` controls the format of the output. Supported values: `:html`, `:raw` (default).
+  - `:h` controls the heading level used for each schema (`3` corresponds to an `h3` tag).
+    This is only relevant when `:format` is set to `:html`. Default: `2`
 
   The `:raw` format returns information as a list of `Inspecto.Schema` structs.
 
@@ -81,6 +83,7 @@ defmodule Inspecto do
   @spec summarize(modules :: [module()], opts :: Keyword.t()) :: String.t() | [Schema.t()]
   def summarize(modules, opts \\ []) when is_list(modules) do
     format = Keyword.get(opts, :format, :raw)
+    heading_level = Keyword.get(opts, :h, 2)
 
     modules
     |> Enum.reduce([], fn m, acc ->
@@ -90,21 +93,21 @@ defmodule Inspecto do
       end
     end)
     |> Enum.reverse()
-    |> do_format(format)
+    |> apply_format(format, heading_level)
   end
 
-  defp do_format(schemas, :raw), do: schemas
+  defp apply_format(schemas, :raw, _), do: schemas
 
-  defp do_format(schemas, :html), do: table_wrapper(schemas)
+  defp apply_format(schemas, :html, heading_level), do: table_wrapper(schemas, heading_level)
 
   EEx.function_from_file(
     :defp,
     :table_wrapper,
     "#{@local_path}/table_wrapper.eex",
-    [:schemas]
+    [:schemas, :heading_level]
   )
 
-  EEx.function_from_file(:defp, :table, "#{@local_path}/table.eex", [:schema])
+  EEx.function_from_file(:defp, :table, "#{@local_path}/table.eex", [:schema, :heading_level])
 
   defp stringify(module), do: String.trim_leading("#{module}", "Elixir.")
 
