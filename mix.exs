@@ -1,7 +1,7 @@
 defmodule Inspecto.MixProject do
   use Mix.Project
 
-  @version "0.3.0"
+  @version "0.3.1"
 
   @source_url "https://github.com/fireproofsocks/inspecto"
 
@@ -21,7 +21,7 @@ defmodule Inspecto.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:excoveralls, "~> 0.14.0", only: [:dev, :test], runtime: false},
+      {:excoveralls, "~> 0.14", only: [:dev, :test], runtime: false},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.2", only: [:dev], runtime: false},
       {:ex_doc, "~> 0.28", runtime: false}
