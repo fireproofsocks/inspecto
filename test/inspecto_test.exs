@@ -49,5 +49,10 @@ defmodule InspectoTest do
       assert [FakeEctoSchema]
              |> Inspecto.summarize(format: :html, h: 4) =~ "<h4>"
     end
+
+    test "closes head tag" do
+      assert [FakeEctoSchema]
+             |> Inspecto.summarize(format: :html, h: 4) =~ "</h4>"
+    end
   end
 end
