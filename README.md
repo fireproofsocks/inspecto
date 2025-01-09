@@ -6,10 +6,9 @@
 [![License](https://img.shields.io/hexpm/l/inspecto.svg)](https://hex.pm/packages/inspecto)
 [![Last Updated](https://img.shields.io/github/last-commit/fireproofsocks/inspecto.svg)](https://github.com/fireproofsocks/inspecto/commits/master)
 
-`Inspecto` is a utility for inspecting Ecto schemas to view the field names,
-  data types, and default values.
+`Inspecto` is a utility to facilitate the inspection of `Ecto` schemas (via reflection) to view the field names, data types, default values, etc.
 
-Note that Ecto schema modules do not contain full information about your database schemas: they only contain enough information to act as a viable intermediary for the Elixir layer.  You cannot, for example, know character length limits or input constraints by merely inspecting Ecto schemas.  Although Ecto _migrations_ contain a lot more of this information, they too aren't great for the purpose because (by design) migrations are additive with changes spread out over time, and importantly, there is no requirement that a database be defined via migrations! So `Inspecto` attempts to provide insight into what it can.
+Note that `Ecto` schema modules do not contain full information about your database schemas: they only contain enough information to act as a viable intermediary for the Elixir layer.  You cannot, for example, know character length limits or input constraints by merely inspecting `Ecto` schemas.  Although `Ecto` _migrations_ contain a lot more of this information, they too aren't ideal for the purpose because (by design) migrations are additive with changes spread out over time, and importantly, _there is no requirement that a database be defined via migrations!_ So `Inspecto` attempts to provide insight into what it can.
 
 ## Installation
 
@@ -19,7 +18,7 @@ by adding `inspecto` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:inspecto, "~> 0.1.0"}
+    {:inspecto, "~> 0.4.0"}
   ]
 end
 ```

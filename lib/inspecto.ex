@@ -89,7 +89,7 @@ defmodule Inspecto do
     |> Enum.reduce([], fn m, acc ->
       case Schema.inspect(m) do
         {:ok, schema} -> [schema | acc]
-        {:invalid_module, _} -> acc
+        {:error, _} -> acc
       end
     end)
     |> Enum.reverse()
@@ -126,8 +126,6 @@ defmodule Inspecto do
     |> Enum.filter(fn {name, _file, _loaded} ->
       String.starts_with?(to_string(name), to_string(namespace))
     end)
-    |> Enum.map(fn {name, _file, _loaded} ->
-      name |> List.to_atom()
-    end)
+    |> Enum.map(fn {name_as_charlist, _file, _loaded} -> List.to_atom(name_as_charlist) end)
   end
 end
