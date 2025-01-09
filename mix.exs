@@ -1,7 +1,7 @@
 defmodule Inspecto.MixProject do
   use Mix.Project
 
-  @version "0.3.1"
+  @version "0.4.0"
 
   @source_url "https://github.com/fireproofsocks/inspecto"
 
@@ -21,17 +21,18 @@ defmodule Inspecto.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:excoveralls, "~> 0.14", only: [:dev, :test], runtime: false},
-      {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
-      {:dialyxir, "~> 1.2", only: [:dev], runtime: false},
-      {:ex_doc, "~> 0.28", runtime: false}
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
+      {:dialyxir, "~> 1.4", only: [:dev], runtime: false},
+      {:ecto, "~> 3.12", only: [:dev, :test], runtime: false},
+      {:ex_doc, "~> 0.36", runtime: false},
+      {:excoveralls, "~> 0.18", only: [:dev, :test], runtime: false}
     ]
   end
 
   defp description,
     do: """
-    Inspecto (Inspect + Ecto) is a utility to help inspect and summarize your
-    Ecto schemas, giving you an overview of the shape of your database.
+    Inspecto (Inspect + Ecto) is a utility that helps inspect and summarize your
+    Ecto schemas for documentation or other tools that require convenient reflection.
     """
 
   defp elixirc_paths(:test), do: ["lib", "test/support"]
